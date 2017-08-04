@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { FormComponent, TextInput, CheckBoxInput, SelectInput, SubmitButton, Form } from './Form';
+import { FormComponent, TextInput, CheckBoxInput, SelectInput, SubmitButton, Form } from './Form/index';
 
 import * as Validate from '../validate';
 

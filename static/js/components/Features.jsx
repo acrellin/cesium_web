@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 import ReactTabs from 'react-tabs';
 
 import { FormComponent, Form, TextInput, TextareaInput, SubmitButton,
-         CheckBoxInput, SelectInput } from './Form';
+         CheckBoxInput, SelectInput } from './Form/index';
 import * as Validate from '../validate';
 import Expand from './Expand';
 import * as Action from '../actions';

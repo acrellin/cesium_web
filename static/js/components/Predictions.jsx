@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { FormComponent, SelectInput, SubmitButton,
-  Form } from './Form';
+         Form } from './Form/index';
 
 import * as Validate from '../validate';
 
@@ -17,7 +17,7 @@ import Delete from './Delete';
 
 let PredictForm = (props) => {
   const { fields: { modelID, datasetID }, handleSubmit, submitting, resetForm,
-    error } = props;
+          error } = props;
 
   const datasets = props.datasets.map(ds => (
     { id: ds.id,

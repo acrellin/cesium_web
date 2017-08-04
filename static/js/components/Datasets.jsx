@@ -34,7 +34,7 @@ DatasetsTab.defaultProps = {
 
 let DatasetForm = (props) => {
   const { fields: { datasetName, headerFile, tarFile },
-    error, handleSubmit, submitting } = props;
+          error, handleSubmit, submitting } = props;
 
   const description = {
     fontStyle: 'italic',
