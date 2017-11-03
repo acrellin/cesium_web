@@ -29,6 +29,7 @@ class PredictionHandler(BaseHandler):
             prediction = DBSession().merge(prediction)
             prediction.task_id = None
             prediction.finished = datetime.datetime.now()
+            DBSession().add(prediction)
             DBSession().commit()
 
             self.action('baselayer/SHOW_NOTIFICATION',
