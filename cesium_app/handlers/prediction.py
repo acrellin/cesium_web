@@ -18,6 +18,7 @@ import os
 import tempfile
 import numpy as np
 import pandas as pd
+import traceback
 
 
 class PredictionHandler(BaseHandler):
@@ -38,6 +39,7 @@ class PredictionHandler(BaseHandler):
                             })
 
         except Exception as e:
+            traceback.print_exc()
             DBSession().delete(prediction)
             DBSession().commit()
             self.action('baselayer/SHOW_NOTIFICATION',
@@ -54,6 +56,7 @@ class PredictionHandler(BaseHandler):
     @auth_or_token
     async def post(self):
         data = self.get_json()
+        print('\n\n   *****************   pred request data:\n', data)
 
         dataset_id = data['datasetID']
         model_id = data['modelID']
@@ -120,6 +123,7 @@ class PredictionHandler(BaseHandler):
 
     @auth_or_token
     def get(self, prediction_id=None, action=None):
+        print('\n\n   ************    pred GET request predID:', prediction_id)
         if action == 'download':
             pred_path = Prediction.get_if_owned_by(prediction_id,
                                                    self.current_user).file_uri
@@ -138,23 +142,29 @@ class PredictionHandler(BaseHandler):
             self.write(result.to_csv(index=True))
         else:
             if prediction_id is None:
+                print('   **********  trying to get ALL preds...')
                 predictions = [prediction
                                for project in self.current_user.projects
                                for prediction in project.predictions]
                 prediction_info = [p.display_info() for p in predictions]
+                print('successfully got all preds')
             else:
+                print(f' **************    trying to get single pred w/ id {prediction_id}')
                 prediction = Prediction.get_if_owned_by(prediction_id,
                                                         self.current_user)
                 prediction_info = prediction.display_info()
+                print('successfully got pred info')
 
             return self.success(prediction_info)
 
     @auth_or_token
     def delete(self, prediction_id):
+        print(f'   ***********      trying to delete prediction with id {prediction_id}...')
         prediction = Prediction.get_if_owned_by(prediction_id,
                                                 self.current_user)
         DBSession().delete(prediction)
         DBSession().commit()
+        print('successfully deleted pred.')
         return self.success(action='cesium/FETCH_PREDICTIONS')
 
 
