@@ -63,8 +63,7 @@ class PredictionHandler(BaseHandler):
     @auth_or_token
     async def post(self):
         data = self.get_json()
-        print('\n\n   *****************   pred request data:\n', data)
-
+        print('\n\n   *****************   create new Pred request data:\n', data)
         dataset_id = data['datasetID']
         model_id = data['modelID']
         # If only a subset of specified dataset is to be used, a list of the
@@ -72,6 +71,8 @@ class PredictionHandler(BaseHandler):
         ts_names = data.get('ts_names')
 
         dataset = Dataset.get_if_owned_by(data["datasetID"], self.current_user)
+        print(f'Dataset associated with new Pred: {dataset}')
+        print(f'Project entries at this point: {list(Project.query)}')
         model = Model.get_if_owned_by(data["modelID"], self.current_user)
         fset = model.featureset
 
