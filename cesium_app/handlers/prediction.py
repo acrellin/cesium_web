@@ -32,6 +32,9 @@ class PredictionHandler(BaseHandler):
             DBSession().add(prediction)
             DBSession().commit()
 
+            print('\n\n Just Committed updated Prediction - current DB Pred entries: ',
+              list(Prediction.query))
+
             self.action('baselayer/SHOW_NOTIFICATION',
                         payload={
                             "note": "Prediction '{}/{}' completed.".format(
@@ -41,8 +44,11 @@ class PredictionHandler(BaseHandler):
 
         except Exception as e:
             traceback.print_exc()
+            print("\n\n PRED FAILED -    Deleting pred entry.")
             DBSession().delete(prediction)
             DBSession().commit()
+            print('\n\n Just deleted failed Prediction entry- current DB Pred entries: ',
+              list(Prediction.query))
             self.action('baselayer/SHOW_NOTIFICATION',
                         payload={
                             "note": "Prediction '{}/{}'" " failed "
@@ -116,6 +122,9 @@ class PredictionHandler(BaseHandler):
         prediction.task_id = future.key
         DBSession().add(prediction)
         DBSession().commit()
+
+        print('\n\n Just Committed new Prediction - current DB Pred entries: ',
+              list(Prediction.query))
 
         loop = tornado.ioloop.IOLoop.current()
         loop.spawn_callback(self._await_prediction, future, prediction)
