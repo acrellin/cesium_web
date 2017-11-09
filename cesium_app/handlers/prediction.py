@@ -45,6 +45,7 @@ class PredictionHandler(BaseHandler):
         except Exception as e:
             traceback.print_exc()
             print("\n\n PRED FAILED -    Deleting pred entry.")
+            print(' and current Project entries:', list(Project.query))
             DBSession().delete(prediction)
             DBSession().commit()
             print('\n\n Just deleted failed Prediction entry- current DB Pred entries: ',

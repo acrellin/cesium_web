@@ -24,6 +24,9 @@ class ProjectHandler(BaseHandler):
         DBSession().add(p)
         DBSession().commit()
 
+        print(f"\n\n Just added a new project ({p}): here's DB contents at this point:",
+              list(Project.query))
+
         return self.success({"id": p.id}, 'cesium/FETCH_PROJECTS')
 
     @auth_or_token

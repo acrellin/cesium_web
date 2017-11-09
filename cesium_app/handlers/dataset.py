@@ -81,6 +81,9 @@ class DatasetHandler(BaseHandler):
         DBSession().add(d)
         DBSession().commit()
 
+        print(f"\n\n Just added a new dataset ({d}): here's DB contents at this point:",
+              list(Dataset.query))
+
         return self.success(d.display_info(), 'cesium/FETCH_DATASETS')
 
     @auth_or_token
