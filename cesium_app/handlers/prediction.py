@@ -29,7 +29,7 @@ class PredictionHandler(BaseHandler):
             prediction = DBSession().merge(prediction)
             prediction.task_id = None
             prediction.finished = datetime.datetime.now()
-            DBSession().add(prediction)
+            # DBSession().add(prediction)
             DBSession().commit()
 
             print('\n\n Just Committed updated Prediction - current DB Pred entries: ',
