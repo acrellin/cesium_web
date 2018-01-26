@@ -23,6 +23,8 @@ class FeatureHandler(BaseHandler):
             print(fset_path)
             fset, data = featurize.load_featureset(fset_path)
             fset.index.name = 'ts_name'
+            fset.columns = fset.columns.get_level_values(0)
+            fset.columns.name = None
             self.set_header("Content-Type", 'text/csv; charset="utf-8"')
             self.set_header("Content-Disposition", "attachment; "
                             "filename=cesium_featureset.csv")
