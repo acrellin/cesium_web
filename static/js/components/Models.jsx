@@ -9,6 +9,7 @@ import * as Validate from '../validate';
 import * as Action from '../actions';
 import Expand from './Expand';
 import Delete from './Delete';
+import Download from './Download';
 import { $try, reformatDatetime } from '../utils';
 import FoldableRow from './FoldableRow';
 import FeatureImportances from './FeatureImportances';
@@ -238,7 +239,11 @@ export let ModelTable = props => (
               <td>{model.name}</td>
               <td>{reformatDatetime(model.created_at)}</td>
               {status}
-              <td><DeleteModel ID={model.id} /></td>
+              <td>
+                <Download url={`/models/${model.id}/download`} />
+                &nbsp;&nbsp;
+                <DeleteModelButton ID={model.id} />
+              </td>
             </tr>
             {foldedContent}
           </FoldableRow>
@@ -262,11 +267,10 @@ const mtMapStateToProps = (state, ownProps) => (
 ModelTable = connect(mtMapStateToProps)(ModelTable);
 
 
-const dmMapDispatchToProps = dispatch => (
+const deleteMapDispatchToProps = dispatch => (
   { delete: id => dispatch(Action.deleteModel(id)) }
 );
-
-const DeleteModel = connect(null, dmMapDispatchToProps)(Delete);
+const DeleteModelButton = connect(null, deleteMapDispatchToProps)(Delete);
 
 
 export default ModelsTab;
