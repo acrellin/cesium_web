@@ -11,19 +11,31 @@ from ..models import DBSession, Dataset, Featureset, Project
 from os.path import join as pjoin
 import uuid
 import datetime
+import pandas as pd
 
 
 class FeatureHandler(BaseHandler):
     @auth_or_token
-    def get(self, featureset_id=None):
-        if featureset_id is not None:
-            featureset_info = Featureset.get_if_owned_by(featureset_id,
-                                                         self.current_user)
+    def get(self, featureset_id=None, action=None):
+        if action == 'download':
+            fset_path = Featureset.get_if_owned_by(featureset_id,
+                                                   self.current_user).file_uri
+            print(fset_path)
+            fset, data = featurize.load_featureset(fset_path)
+            fset.index.name = 'ts_name'
+            self.set_header("Content-Type", 'text/csv; charset="utf-8"')
+            self.set_header("Content-Disposition", "attachment; "
+                            "filename=cesium_featureset.csv")
+            self.write(fset.to_csv(index=True))
         else:
-            featureset_info = [f for p in self.current_user.projects
-                               for f in p.featuresets]
+            if featureset_id is not None:
+                featureset_info = Featureset.get_if_owned_by(featureset_id,
+                                                             self.current_user)
+            else:
+                featureset_info = [f for p in self.current_user.projects
+                                   for f in p.featuresets]
 
-        self.success(featureset_info)
+            self.success(featureset_info)
 
     @auth_or_token
     async def _await_featurization(self, future, fset):
