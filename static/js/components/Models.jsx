@@ -179,7 +179,8 @@ const ModelInfo = props => (
       <tr>
         <th>Model Type</th>
         <th>Hyperparameters</th>
-        {Object.keys(props.model.metrics).map(metric => <th>{metric}</th>)}
+        {Object.keys(props.model.metrics).map(metric =>
+          <th style={{ textAlign: "center" }} key={`th_${metric}`}>{metric}</th>)}
       </tr>
     </thead>
     <tbody>
@@ -203,11 +204,11 @@ const ModelInfo = props => (
         </td>
         {
           Object.keys(props.model.metrics).map(metric => (
-            <td>
+            <td key={`td_${metric}`}>
               {
                 metric == 'feature_importances' ?
                 <FeatureImportances data={props.model.metrics[metric]} /> :
-                props.model.metrics[metric]
+                props.model.metrics[metric].toFixed(3)
               }
             </td>))
         }
