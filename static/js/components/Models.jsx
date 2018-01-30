@@ -13,6 +13,7 @@ import Delete from './Delete';
 import Download from './Download';
 import { $try, reformatDatetime } from '../utils';
 import FoldableRow from './FoldableRow';
+import FeatureImportances from './FeatureImportances';
 
 
 const ModelsTab = props => (
@@ -178,7 +179,7 @@ const ModelInfo = props => (
       <tr>
         <th>Model Type</th>
         <th>Hyperparameters</th>
-        <th>Training Data Score</th>
+        {Object.keys(props.model.metrics).map(metric => <th>{metric}</th>)}
       </tr>
     </thead>
     <tbody>
@@ -200,9 +201,16 @@ const ModelInfo = props => (
             </tbody>
           </table>
         </td>
-        <td>
-          {props.model.train_score}
-        </td>
+        {
+          Object.keys(props.model.metrics).map(metric => (
+            <td>
+              {
+                metric == 'feature_importances' ?
+                <FeatureImportances data={props.model.metrics[metric]} /> :
+                props.model.metrics[metric]
+              }
+            </td>))
+        }
       </tr>
     </tbody>
   </table>
