@@ -135,7 +135,8 @@ class PredictionHandler(BaseHandler):
             self.set_header("Content-Type", 'text/csv; charset="utf-8"')
             self.set_header(
                 "Content-Disposition", "attachment; "
-                f"filename=cesium_prediction_results_{prediction.dataset.name}"
+                f"filename=cesium_prediction_results_{prediction.project.name}"
+                f"_{prediction.dataset.name}"
                 f"_{prediction.model.name}_{prediction.finished}.csv")
             self.write(result.to_csv(index=True))
         else:

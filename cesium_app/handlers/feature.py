@@ -29,7 +29,8 @@ class FeatureHandler(BaseHandler):
             self.set_header("Content-Type", 'text/csv; charset="utf-8"')
             self.set_header(
                 "Content-Disposition", "attachment; "
-                f"filename=cesium_featureset_{featureset.name}_{featureset.finished}.csv")
+                f"filename=cesium_featureset_{featureset.project.name}"
+                f"_{featureset.name}_{featureset.finished}.csv")
             self.write(fset.to_csv(index=True))
         else:
             if featureset_id is not None:
