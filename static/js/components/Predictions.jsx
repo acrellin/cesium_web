@@ -131,7 +131,10 @@ let PredictionsTable = props => (
               <td>{reformatDatetime(prediction.created_at)}</td>
               {status}
               <td>
-                <DownloadPredCSV ID={prediction.id} />
+                {
+                  done &&
+                  <DownloadPredCSV ID={prediction.id} />
+                }
                 &nbsp;&nbsp;
                 <DeletePrediction ID={prediction.id} />
               </td>
