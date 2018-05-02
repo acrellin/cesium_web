@@ -103,6 +103,7 @@ def test_model_info_display(driver, project, featureset, model):
     driver.find_element_by_id('react-tabs-6').click()
 
     driver.wait_for_xpath("//td[contains(text(),'{}')]".format(model.name)).click()
+    time.sleep(0.5)
     assert driver.wait_for_xpath("//th[contains(text(),'Model Type')]")\
                  .is_displayed()
     assert driver.wait_for_xpath("//th[contains(text(),'Hyper"
