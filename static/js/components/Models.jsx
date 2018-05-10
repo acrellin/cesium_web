@@ -207,8 +207,8 @@ const ModelInfo = props => (
             <td key={`td_${metric}`}>
               {
                 metric == 'feature_importances' ?
-                <FeatureImportances data={props.model.metrics[metric]} /> :
-                props.model.metrics[metric].toFixed(3)
+                  <FeatureImportances data={props.model.metrics[metric]} /> :
+                  props.model.metrics[metric].toFixed(3)
               }
             </td>))
         }
