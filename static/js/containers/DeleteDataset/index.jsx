@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 
-import * as Action from '../actions';
+import * as Action from '../../actions';
+import Delete from '../../components/Delete';
 
 
 const mapDispatchToProps = dispatch => (

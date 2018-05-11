@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import DatasetInfo from '../containers/DatasetInfo';
-import DeleteDataset from '../containers/DeleteDataset';
+import DatasetInfo from '../../components/DatasetInfo';
+import DeleteDataset from '../../containers/DeleteDataset';
+import FoldableRow from '../FoldableRow';
+import { reformatDatetime } from '../../utils';
 
-export let DatasetTable = props => (
+
+const DatasetTable = props => (
   <table className="table">
     <thead>
       <tr>
@@ -38,7 +42,7 @@ export let DatasetTable = props => (
   </table>
 );
 DatasetTable.propTypes = {
-  datasets: React.PropTypes.arrayOf(React.PropTypes.object)
+  datasets: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default DatasetTable;

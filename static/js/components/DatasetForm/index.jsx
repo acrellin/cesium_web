@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Form, TextInput, FileInput, SubmitButton } from '../Form';
+import CesiumTooltip from '../Tooltip';
 
-let DatasetForm = (props) => {
+
+const DatasetForm = (props) => {
   const { fields: { datasetName, headerFile, tarFile },
           error, handleSubmit, submitting } = props;
 
@@ -23,7 +26,7 @@ let DatasetForm = (props) => {
         />
 
         <div style={description}>
-          Format: comma-separated with columns "filename" (of a time series from the uploaded archive), "label" (class label or numerical value), and any metafeatures (numerical).
+          {'Format: comma-separated with columns "filename" (of a time series from the uploaded archive), "label" (class label or numerical value), and any metafeatures (numerical).'}
         </div>
 
         <FileInput
@@ -33,7 +36,7 @@ let DatasetForm = (props) => {
           data-for="tarfileTooltip"
         />
         <div style={description}>
-          Format: zipfile or tarfile containing time series files, each of which is comma-separated with columns "time", "value", "error" (optional).
+          {'Format: zipfile or tarfile containing time series files, each of which is comma-separated with columns "time", "value", "error" (optional).'}
         </div>
 
         <SubmitButton label="Upload Dataset" disabled={submitting} />
@@ -62,3 +65,8 @@ DatasetForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired
 };
+DatasetForm.defaultProps = {
+  error: ""
+};
+
+export default DatasetForm;
