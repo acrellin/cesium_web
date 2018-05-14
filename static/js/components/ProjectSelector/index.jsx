@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {SelectInput, Form} from '../Form/index';
+import { SelectInput, Form } from '../Form/index';
 
 
 let ProjectSelector = ({ projects, label, style, fields }) => {
-
   const project_list = projects.map(proj => (
     {
       id: proj.id,
@@ -26,10 +25,13 @@ let ProjectSelector = ({ projects, label, style, fields }) => {
   );
 };
 ProjectSelector.propTypes = {
-  fields: PropTypes.object,
+  fields: PropTypes.object.isRequired,
   projects: PropTypes.arrayOf(PropTypes.object).isRequired,
   style: PropTypes.object,
-  label: PropTypes.string
+  label: PropTypes.string.isRequired
+};
+ProjectSelector.defaultProps = {
+  style: {}
 };
 
 

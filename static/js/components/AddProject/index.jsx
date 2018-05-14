@@ -19,7 +19,8 @@ const AddProject = ({ id, label, addProject, style }) => {
     <Expand
       id={id}
       label={label || "Add Project"}
-      expandBoxStyle={expandBoxStyle} style={style}
+      expandBoxStyle={expandBoxStyle}
+      style={style}
     >
       <NewProjectForm label="Create Project" onSubmit={addProject} />
     </Expand>
@@ -28,9 +29,12 @@ const AddProject = ({ id, label, addProject, style }) => {
 
 AddProject.propTypes = {
   id: PropTypes.string.isRequired,
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
   addProject: PropTypes.func.isRequired,
   style: PropTypes.object
+};
+AddProject.defaultProps = {
+  style: {}
 };
 
 

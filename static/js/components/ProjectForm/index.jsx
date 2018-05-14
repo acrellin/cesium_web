@@ -14,7 +14,8 @@ const ProjectForm = (props) => {
       <TextInput label="Project Description (optional)" {...projectDescription} />
       <SubmitButton
         label={props.label}
-        submitting={submitting} resetForm={resetForm}
+        submitting={submitting}
+        resetForm={resetForm}
       />
     </Form>
   );
@@ -26,6 +27,9 @@ ProjectForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   resetForm: PropTypes.func.isRequired
+};
+ProjectForm.defaultProps = {
+  error: ''
 };
 
 export default ProjectForm;

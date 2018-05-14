@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { FormComponent, Form, TextInput, FileInput, SubmitButton } from '../Form/index';
@@ -20,7 +21,7 @@ const DatasetsTab = props => (
   </div>
 );
 DatasetsTab.propTypes = {
-  selectedProject: React.PropTypes.object
+  selectedProject: PropTypes.object.isRequired
 };
 
 export default DatasetsTab;

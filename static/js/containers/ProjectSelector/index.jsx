@@ -22,5 +22,5 @@ const mapStateToProps = (state) => {
 
 const ProjectSelectorContainer = connect(mapStateToProps)(ProjectSelector);
 
-export default reduxForm({form: 'projectSelector',
-                          fields: ['project']})(ProjectSelectorContainer);
+export default reduxForm({ form: 'projectSelector',
+                          fields: ['project'] })(ProjectSelectorContainer);
