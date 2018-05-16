@@ -1,20 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import { reduxForm } from 'redux-form';
-import ReactTabs from 'react-tabs';
 
-import { FormComponent, Form, TextInput, TextareaInput, SubmitButton,
-         CheckBoxInput, SelectInput } from './Form/index';
-import * as Validate from '../validate';
-import Expand from './Expand';
-import * as Action from '../actions';
-import Plot from './Plot';
-import FoldableRow from './FoldableRow';
-import { reformatDatetime, contains } from '../utils';
-import UploadFeaturesForm from './UploadFeaturesForm';
-import FeaturizeForm from './FeaturizeForm';
-import FeaturesetsTable from './FeaturesetsTable';
+import Expand from '../Expand';
+import UploadFeaturesForm from '../../containers/UploadFeaturesForm';
+import FeaturizeForm from '../../containers/FeaturizeForm';
+import FeaturesetsTable from '../../containers/FeaturesetsTable';
 
 
 let FeaturesTab = (props) => {
@@ -56,16 +46,5 @@ FeaturesTab.propTypes = {
 FeaturesTab.defaultProps = {
   selectedProject: {}
 };
-
-const ftMapDispatchToProps = (dispatch, ownProps) => (
-  {
-    computeFeatures: form => dispatch(Action.computeFeatures(form)),
-    uploadFeatures: form => dispatch(
-      Action.uploadFeatureset(form, ownProps.selectedProject)
-    )
-  }
-);
-
-FeaturesTab = connect(null, ftMapDispatchToProps)(FeaturesTab);
 
 export default FeaturesTab;

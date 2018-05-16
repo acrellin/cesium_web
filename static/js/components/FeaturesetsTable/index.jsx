@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import { reformatDatetime } from '../utils';
-import Plot from './Plot';
-import FoldableRow from './FoldableRow';
-import Delete from './Delete';
-import * as Action from '../actions';
+import { reformatDatetime } from '../../utils';
+import Plot from '../Plot';
+import FoldableRow from '../FoldableRow';
+import DeleteFeatureset from '../../containers/DeleteFeatureset';
 
 
 const FeaturesetsTable = props => (
@@ -60,19 +58,4 @@ FeaturesetsTable.defaultProps = {
   featurePlotURL: null
 };
 
-
-const ftMapStateToProps = (state, ownProps) => (
-  {
-    featuresets: state.featuresets.filter(
-      fs => (fs.project_id === ownProps.selectedProject.id)
-    )
-  }
-);
-
-const deleteMapDispatchToProps = dispatch => (
-  { delete: id => dispatch(Action.deleteFeatureset(id)) }
-);
-
-const DeleteFeatureset = connect(null, deleteMapDispatchToProps)(Delete);
-
-export default connect(ftMapStateToProps)(FeaturesetsTable);
+export default FeaturesetsTable;

@@ -16,7 +16,7 @@ import AddProject from '../containers/AddProject';
 import ProjectSelector from '../containers/ProjectSelector';
 import ProjectTab from '../containers/ProjectTab';
 import DatasetsTab from './DatasetsTab';
-import FeaturesTab from './Features';
+import FeaturesTab from '../containers/FeaturesTab';
 import ModelsTab from './Models';
 import PredictTab from './Predictions';
 import colorScheme from './colorscheme';
