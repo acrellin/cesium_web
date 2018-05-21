@@ -18,7 +18,7 @@ import ProjectTab from '../containers/ProjectTab';
 import DatasetsTab from './DatasetsTab';
 import FeaturesTab from '../containers/FeaturesTab';
 import ModelsTab from './ModelsTab';
-import PredictTab from './Predictions';
+import PredictTab from '../containers/PredictionsTab';
 import colorScheme from './colorscheme';
 import Progress from './Progress';
 import CesiumTooltip from './Tooltip';
