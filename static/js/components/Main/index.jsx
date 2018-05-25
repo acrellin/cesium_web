@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, Provider } from 'react-redux';
-import ReactDOM from 'react-dom';
 import ReactTabs from 'react-tabs';
 
 import 'bootstrap-css';
@@ -9,25 +8,25 @@ import 'bootstrap';
 
 import { Notifications } from 'baselayer/components/Notifications';
 import WebSocket from 'baselayer/components/WebSocket';
-import configureStore from '../configureStore';
-import * as Action from '../actions';
-import CesiumMessageHandler from '../CesiumMessageHandler';
-import AddProject from '../containers/AddProject';
-import ProjectSelector from '../containers/ProjectSelector';
-import ProjectTab from '../containers/ProjectTab';
-import DatasetsTab from './DatasetsTab';
-import FeaturesTab from '../containers/FeaturesTab';
-import ModelsTab from './ModelsTab';
-import PredictTab from '../containers/PredictionsTab';
-import colorScheme from './colorscheme';
-import Progress from './Progress';
-import CesiumTooltip from './Tooltip';
-import UserProfile from './UserProfile';
+import configureStore from '../../configureStore';
+import * as Action from '../../actions';
+import CesiumMessageHandler from '../../CesiumMessageHandler';
+import AddProject from '../../containers/AddProject';
+import ProjectSelector from '../../containers/ProjectSelector';
+import ProjectTab from '../../containers/ProjectTab';
+import DatasetsTab from '../DatasetsTab';
+import FeaturesTab from '../../containers/FeaturesTab';
+import ModelsTab from '../ModelsTab';
+import PredictTab from '../../containers/PredictionsTab';
+import colorScheme from '../colorscheme';
+import Progress from '../Progress';
+import CesiumTooltip from '../Tooltip';
+import UserProfile from '../UserProfile';
 
 const { Tab, Tabs, TabList, TabPanel } = { ...ReactTabs };
 const cs = colorScheme;
 
-const store = configureStore();
+export const store = configureStore();
 
 const messageHandler = CesiumMessageHandler(store.dispatch);
 
@@ -383,49 +382,4 @@ MainContent.defaultProps = {
   selectedProject: {}
 };
 
-const mapStateToProps = function (state) {
-  // This can be improved by using
-  // http://redux-form.com/6.0.0-alpha.13/docs/api/FormValueSelector.md/
-  const { projectSelector } = { ...state.form };
-  const selectedProjectId = projectSelector ? projectSelector.project.value : "";
-  let selectedProject = state.projects.projectList.filter(
-    p => (p.id == selectedProjectId)
-  );
-
-  const [firstProject] = state.projects.projectList || { id: '', label: '', description: '' };
-
-  if (selectedProject.length > 0) {
-    [selectedProject] = selectedProject;
-  } else {
-    selectedProject = firstProject;
-  }
-
-  return {
-    projects: state.projects.projectList,
-    datasets: state.datasets,
-    featuresets: state.featuresets,
-    selectedProject,
-    logoSpinAngle: state.misc.logoSpinAngle
-  };
-};
-
-const mapDispatchToProps = dispatch => (
-  {
-    handleSubmitModelClick: (form) => {
-      dispatch(Action.createModel(form));
-    },
-    spinLogo: () => {
-      dispatch(Action.spinLogo());
-    }
-  }
-);
-
-MainContent = connect(mapStateToProps, mapDispatchToProps)(MainContent);
-
-
-ReactDOM.render(
-  <Provider store={store}>
-    <MainContent root={window.location.host + window.location.pathname} />
-  </Provider>,
-  document.getElementById('content')
-);
+export default MainContent;
