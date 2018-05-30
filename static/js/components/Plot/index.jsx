@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { showNotification } from 'baselayer/components/Notifications';
 /* eslint-disable */
-import "../../../node_modules/bokehjs/build/js/bokeh.js";
-import "../../../node_modules/bokehjs/build/css/bokeh.css";
+import "../../../../node_modules/bokehjs/build/js/bokeh.js";
+import "../../../../node_modules/bokehjs/build/css/bokeh.css";
 /* eslint-enable */
 
 

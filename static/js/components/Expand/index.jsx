@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toggleExpander } from '../actions';
-import Dot from './Dot';
+import { toggleExpander } from '../../actions';
+import Dot from '../Dot';
 
 
 let Expand = (props) => {

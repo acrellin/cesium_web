@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import colorScheme from './colorscheme';
+import colorScheme from '../colorscheme';
 
 const cs = colorScheme;
 
