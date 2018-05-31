@@ -5,6 +5,7 @@ import { reset as resetForm } from 'redux-form';
 
 import { showNotification } from 'baselayer/components/Notifications';
 import promiseAction from './action_tools';
+import { fetchUserProfile } from './ducks/profile';
 
 
 export const HYDRATE = 'cesium/HYDRATE';
@@ -49,9 +50,6 @@ export const RECEIVE_SKLEARN_MODELS = 'cesium/RECEIVE_SKLEARN_MODELS';
 export const SPIN_LOGO = 'cesium/SPIN_LOGO';
 export const GROUP_TOGGLE_FEATURES = 'cesium/GROUP_TOGGLE_FEATURES';
 export const CLICK_FEATURE_TAG_CHECKBOX = 'cesium/CLICK_FEATURE_TAG_CHECKBOX';
-
-export const FETCH_USER_PROFILE = 'cesium/FETCH_USER_PROFILE';
-export const RECEIVE_USER_PROFILE = 'cesium/FETCH_USER_PROFILE';
 
 export const FEATURIZE_PROGRESS = 'cesium/FEATURIZE_PROGRESS';
 
@@ -732,39 +730,6 @@ export function clickFeatureTagCheckbox(tag) {
   return {
     type: CLICK_FEATURE_TAG_CHECKBOX,
     payload: { tag }
-  };
-}
-
-
-export function fetchUserProfile() {
-  return dispatch =>
-    promiseAction(
-      dispatch,
-      FETCH_USER_PROFILE,
-
-      fetch('/baselayer/profile', {
-        credentials: 'same-origin'
-      })
-        .then(response => response.json())
-        .then((json) => {
-          if (json.status === 'success') {
-            dispatch(receiveUserProfile(json.data));
-          } else {
-            dispatch(
-              showNotification(
-                'Error downloading user profile ({})'.format(json.message)
-              )
-            );
-          }
-          return json;
-        }).catch(ex => console.log('fetchUserProfile exception:', ex))
-    );
-}
-
-function receiveUserProfile(userProfile) {
-  return {
-    type: RECEIVE_USER_PROFILE,
-    payload: userProfile
   };
 }
 

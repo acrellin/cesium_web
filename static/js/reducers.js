@@ -4,17 +4,7 @@ import { reducer as formReducer } from 'redux-form';
 import { reducer as notifications } from 'baselayer/components/Notifications';
 import * as Action from './actions';
 import { contains, joinObjectValues } from './utils';
-
-
-function profile(state={ username: '' }, action) {
-  switch (action.type) {
-    case Action.RECEIVE_USER_PROFILE:
-      return action.payload;
-    default:
-      return state;
-  }
-}
-
+import { profileReducer as profile } from './ducks/profile';
 
 function projects(state={ projectList: [] }, action) {
   switch (action.type) {
